@@ -7,7 +7,7 @@ import { CodeGen } from './codegen';
 const { parse } = WebIDL2;
 const argv = yargs(process.argv.slice(2))
     .usage('Usage: node --loader ts-node/esm --experimental-specifier-resolution=node --harmony -r source-map-support/register src/index.ts [options]')
-    .example('node --loader ts-node/esm --experimental-specifier-resolution=node --harmony -r source-map-support/register src/index.ts -f ../box2d-wasm/Box2D.idl -n Box2D -o dist/Box2D.d.ts', 'count the lines in the given file')
+    .example('node --loader ts-node/esm --experimental-specifier-resolution=node --harmony -r source-map-support/register src/index.ts -f ../box2d-wasm/Box2D.idl -n Box2D -o dist/box2d.d.ts', 'count the lines in the given file')
     .option('f', {
     type: 'string',
     demandOption: true,
