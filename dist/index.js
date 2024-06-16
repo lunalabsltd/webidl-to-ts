@@ -3,7 +3,7 @@ import yargs from 'yargs';
 import path from 'path';
 import fs from 'fs';
 import WebIDL2 from 'webidl2';
-import { CodeGen } from './codegen';
+import { CodeGen } from './codegen.js';
 const { parse } = WebIDL2;
 const argv = yargs(process.argv.slice(2))
     .usage('Usage: node --loader ts-node/esm --experimental-specifier-resolution=node --harmony -r source-map-support/register src/index.ts [options]')
@@ -86,12 +86,12 @@ const compile = (webIDLRoots, options) => {
     // our initial source is an empty TypeScript file
     const program = ts.createProgram(['out.ts'], options, host);
     program.emit(
-    /*targetSourceFile?: SourceFile*/ undefined, 
-    /*writeFile?: WriteFileCallback*/ undefined, 
-    /*cancellationToken?: CancellationToken*/ undefined, 
-    /*emitOnlyDtsFiles?: boolean*/ true, 
+    /*targetSourceFile?: SourceFile*/ undefined,
+    /*writeFile?: WriteFileCallback*/ undefined,
+    /*cancellationToken?: CancellationToken*/ undefined,
+    /*emitOnlyDtsFiles?: boolean*/ true,
     /*customTransformers?: CustomTransformers*/ {
-        afterDeclarations: [(context) => (rootNode) => context.factory.updateSourceFile(rootNode, [new CodeGen(context /*, program.getTypeChecker()*/).codegen(webIDLRoots, argv.n)], 
+        afterDeclarations: [(context) => (rootNode) => context.factory.updateSourceFile(rootNode, [new CodeGen(context /*, program.getTypeChecker()*/).codegen(webIDLRoots, argv.n)],
             /*isDeclarationFile*/ true)
         ]
     });
